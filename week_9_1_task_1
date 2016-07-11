@@ -1,0 +1,35 @@
+#include <iostream>
+#include <locale.h>
+
+using namespace std;
+
+int main()
+{
+	setlocale(LC_ALL, "rus");
+	int const max = 8;
+	int number;
+	int lol[max] = {1, 4, 3, 9, 7, 8, 6, 2};
+	for (int i = 0; i < max; i++)
+	{
+		cout << lol[i] << ' ';
+	}
+	cout << endl;
+	for (int j = 0, masiv = 0; j < max; j++)
+	{
+		number = 100;
+		for (int i = j; i < max; i++)
+		{
+			if (lol[i] < number)
+			{
+				number = lol[i];
+				masiv = i;
+			}
+		}
+		lol[masiv] = lol[j];
+		lol[j] = number;
+	}
+	for (int i = 0; i < max; i++)
+	{
+		cout << lol[i] << ' ';
+	}
+}
