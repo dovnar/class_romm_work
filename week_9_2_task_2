@@ -1,0 +1,44 @@
+#include <iostream>
+#include <locale.h>
+
+using namespace std;
+
+int main()
+{
+	setlocale(LC_ALL, "rus");
+
+	int const size = 2000;
+	char masiv[size];
+
+	for (int i = 0, j = 1; i < size; i++, j += 2)
+	{
+		masiv[i] = j;
+	}
+
+	cout << "ищем = ";
+	int number;
+	cin >> number;
+	int lift = 0;
+	int right = 2000;
+	int l = lift + right;
+
+	while (l != 0)
+	{
+		l /= 2;
+		if (number == masiv[l])
+		{
+			cout << number << " = " << l;
+			break;
+		}
+		if (number > masiv[l])
+		{
+			lift = l;
+			l += right;
+		}
+		else
+		{
+			right = l;
+			l += lift;
+		}
+	}
+}
