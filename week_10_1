@@ -1,0 +1,75 @@
+#include <iostream>
+#include <locale.h>
+
+using namespace std;
+
+int main()
+{
+	setlocale(LC_ALL, "rus");
+
+	int const line = 10;
+	int const size = 3;
+	int phoneList[line][size];
+	int exit;
+	int maxLine = 0;
+	int sorting;
+	int sub;
+	int isq = 0;
+	int number = 1;
+	cout << "вводите требуемые данные\nдля прекрощение ввода данных нажмите 0";
+	for (int i = 0; i < line; i++)
+	{
+		for (int j = 0; j < size; j++)
+		{
+			if (j == 0)
+			{
+				cout << "Введите " << i + 1 << "isq = ";
+			}
+			else if (j == 1)
+			{
+				cout << "Введите" << i + 1; << "номер телефона = ";
+			}
+			else
+			{
+				phoneList[i][j] = i + 1;
+				maxLine++;
+			}
+
+			cin >> exit;
+			
+			if (exit == 0)
+			{
+				break;
+			}
+			phoneList[i][j] = exit;
+		}
+		if (exit == 0)
+		{
+			break;
+		}
+	}
+	cout << "выберете сортировку\n1 для isq с меньшего к большему\n2 для isq с большего к меньшему\n"
+		"3 для номера телефона с меньшего к большему\n4 для номера телефона с большего к меньшему\n";
+	cin >> sorting;
+
+	for (int i = 0; i-1 < maxLine; i++)
+	{
+		for (int j = 0; j - 1 - i < maxLine; j++)
+		{
+			for (int l = 0; l < size; l++) /*для смены мест остальных столбов*/
+			{
+				
+				if (phoneList[j][0] > phoneList[i + 1][0] && sorting == 1 ||
+					phoneList[j][0] < phoneList[i + 1][0] && sorting == 2 ||
+					phoneList[j][1] > phoneList[i + 1][1] && sorting == 3 ||
+					phoneList[j][1] < phoneList[i + 1][1] && sorting == 4)
+				{
+					sub = phoneList[j][l];
+					phoneList[j][l] = phoneList[i + 1][l];
+					phoneList[i + 1][l] = sub;
+				}
+			}
+		}
+	}
+
+}
