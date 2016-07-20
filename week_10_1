@@ -16,29 +16,29 @@ int main()
 	int sub;
 	int isq = 0;
 	int number = 1;
-	cout << "вводите требуемые данные\nдля прекрощение ввода данных нажмите 0";
+	cout << "вводите требуемые данные\nдля прекрощение ввода данных нажмите 0\n";
 	for (int i = 0; i < line; i++)
 	{
 		for (int j = 0; j < size; j++)
 		{
-			if (j == 0)
+			if (j == 1)
 			{
 				cout << "Введите " << i + 1 << "isq = ";
+				cin >> exit;
 			}
-			else if (j == 1)
+			else if (j == 2)
 			{
-				cout << "Введите" << i + 1; << "номер телефона = ";
+				cout << "Введите" << i + 1 << "номер телефона = ";
+				cin >> exit;
 			}
 			else
 			{
-				phoneList[i][j] = i + 1;
+				phoneList[i][j] = maxLine + 1;
 				maxLine++;
 			}
-
-			cin >> exit;
-			
 			if (exit == 0)
 			{
+				maxLine--;
 				break;
 			}
 			phoneList[i][j] = exit;
@@ -52,17 +52,17 @@ int main()
 		"3 для номера телефона с меньшего к большему\n4 для номера телефона с большего к меньшему\n";
 	cin >> sorting;
 
-	for (int i = 0; i-1 < maxLine; i++)
+	for (int i = 0; i - 1 < maxLine; i++)
 	{
 		for (int j = 0; j - 1 - i < maxLine; j++)
 		{
 			for (int l = 0; l < size; l++) /*для смены мест остальных столбов*/
 			{
 				
-				if (phoneList[j][0] > phoneList[i + 1][0] && sorting == 1 ||
-					phoneList[j][0] < phoneList[i + 1][0] && sorting == 2 ||
-					phoneList[j][1] > phoneList[i + 1][1] && sorting == 3 ||
-					phoneList[j][1] < phoneList[i + 1][1] && sorting == 4)
+				if (phoneList[j][0] > phoneList[i + 1][0] && sorting == 1 ||//1 для isq с меньшего к большему
+					phoneList[j][0] < phoneList[i + 1][0] && sorting == 2 ||//2 для isq с большего к меньшему
+					phoneList[j][1] > phoneList[i + 1][1] && sorting == 3 ||//3 для номера телефона с меньшего к большему
+					phoneList[j][1] < phoneList[i + 1][1] && sorting == 4)	//4 для номера телефона с большего к меньшему
 				{
 					sub = phoneList[j][l];
 					phoneList[j][l] = phoneList[i + 1][l];
@@ -71,5 +71,33 @@ int main()
 			}
 		}
 	}
-
+	switch (sorting)
+	{
+	case 1: cout << "isq v\t\tномер телефона\t№\n";
+		break;
+	case 2: cout << "isq ^\t\tномер телефона\t№\n";
+		break;
+	case 3: cout << "isq\t\tномер телефона v\t№\n";
+		break;
+	case 4: cout << "isq\t\tномер телефона ^\t№\n";
+		break;
+	default:
+		break;
+	}
+	for (int i = 0; i < maxLine; i++)
+	{
+		for (int j = 0; j < size; j++)
+		{
+			cout << phoneList[j][i] << "\t";
+			if (j = 0)
+			{
+				cout << "\t";
+			}
+			if (j == 2)
+			{
+				cout << endl;
+			}
+		}
+	}
+	return 0;
 }
